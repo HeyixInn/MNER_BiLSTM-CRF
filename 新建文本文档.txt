@@ -1,0 +1,25 @@
+来源：https://www.bilibili.com/video/BV1kq4y1u7Wu/?spm_id_from=333.999.0.0&vd_source=b68d0ac223650fbd49edda7e1f565b7e
+感谢up呜呜呜
+
+utils.py中
+from torchtext.legacy.data import Field报错：
+pytorch==1.10.0  torchtext==0.11.0
+(删虚拟环境重装 conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cudatoolkit=11.3 -c pytorch -c conda-forge)
+
+model.py中
+删去batch_first这个参数（不知道为啥
+self.crf = CRF(output_size)# , batch_first=True
+
+config.py中 14行处
+# todo 修改数据集路径
+改成你自己的路径
+
+train.py中 56行左右
+# 需要转置一下out（因为发现label和out维度刚好相反..）
+        out = torch.tensor(out).to(label.device)
+        print(out.size)
+
+然后就通了！！！
+
+要跑好久、、巨慢
+建议最好用GPU 
